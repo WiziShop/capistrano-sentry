@@ -30,38 +30,32 @@ You need to setup the `organization`, `projects` and `sha version` you want to a
 [Here](https://docs.sentry.io/api/auth/)
 
 
-### Setting in your deploy.rb
+### Setting in your environment in staging and production
 
 
-```
-
-# In deploy.rb
-
-set: :sentry_organization, 'your organization name' 
-set: :sentry_token, 'the token you get from last section'
-set: :branch_tag, 'the branch tag in the release'
-```
-
-You may have staging project and production project in sentry. 
-So you need to configure the projects name in different name. 
+You need to configure the projects name in different environment.
 
 ```ruby
 
-# In staging.rb
+# In config/deploy/staging.rb
 
 set: :sentry_projects, ['your first project', 'your second project']
+set: :sentry_organization, 'your organization name' 
+set: :sentry_token, 'the token you get from last section'
+set: :branch_tag, `git describe --tags`
 
 # current version name will append after your branch name 
 set: :current_version, `git rev-parse HEAD`.strip
 
 ```
 
+Please set the same setting in your `config/deploy/production.rb` 
+
 The `current_version` help you differ diffferent deployment in the staging enviornement 
 like 
 
 `release/2.0-sha1`
 `release/2.0-sha2`
-
 
 
 ## Contributing
