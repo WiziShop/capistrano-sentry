@@ -1,15 +1,16 @@
 # Capistrano::Sentry
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/capistrano/sentry`. To experiment with that code, run `bin/console` for an interactive prompt.
+It's a callback to sentry application after every deployment you have. 
 
-TODO: Delete this and the text above, and describe your gem
+please check the [reference](https://docs.sentry.io/learn/releases/)
+
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'capistrano-sentry'
+gem 'capistrano-sentry', github: 'git@github.com:resumecompanion/capistrano-sentry.git'
 ```
 
 And then execute:
@@ -22,13 +23,40 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You need to setup the `organization`, `projects` and `sha version` you want to append after the branch name 
 
-## Development
+### Get token from sentry 
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+[Here](https://docs.sentry.io/api/auth/)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+### Setting in your environment in staging and production
+
+
+You need to configure the projects name in different environment.
+
+```ruby
+
+# In config/deploy/staging.rb
+
+set: :sentry_projects, ['your first project', 'your second project']
+set: :sentry_organization, 'your organization name' 
+set: :sentry_token, 'the token you get from last section'
+set: :branch_tag, `git describe --tags`
+
+# current version name will append after your branch name 
+set: :current_version, `git rev-parse HEAD`.strip
+
+```
+
+Please set the same setting in your `config/deploy/production.rb` 
+
+The `current_version` help you differ diffferent deployment in the staging enviornement 
+like 
+
+`release/2.0-sha1`
+`release/2.0-sha2`
+
 
 ## Contributing
 
