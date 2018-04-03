@@ -25,6 +25,19 @@ Or install it yourself as:
 
 You need to setup the `organization`, `projects` and `sha version` you want to append after the branch name 
 
+### Require the hook 
+
+```ruby
+
+# in Capfile
+require 'capistrano/sentry'
+```
+
+This apply the hook `sentry:notify_deployment` 
+
+after `deploy:publishing`
+
+
 ### Get token from sentry 
 
 [Here](https://docs.sentry.io/api/auth/)
