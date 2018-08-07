@@ -17,11 +17,16 @@ namespace :sentry do
     puts 'Notify Sentry Release start ....'
 
     run_locally do
-      response = RestClient.post(url,
-                                 json_payload,
-                                 content_type: 'application/json', authorization: "Bearer #{token}")
+      begin
+        RestClient.post(url, json_payload,
+                        content_type: 'application/json', authorization: "Bearer #{token}") 
 
-      puts "Sentry response: #{response.body}"
+        begin
+          puts "Sentry response: #{response.body}"
+        rescue StandardError => e
+          puts e.response
+        end
+      end
     end
   end
 
