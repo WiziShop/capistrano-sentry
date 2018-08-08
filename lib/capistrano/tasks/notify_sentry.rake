@@ -9,7 +9,7 @@ namespace :sentry do
     token = fetch(:sentry_token)
     projects = fetch(:sentry_projects)
 
-    payload = { version: "#{fetch(:branch_tag).strip!}-#{fetch(:current_version)}",
+    payload = { version: "#{fetch(:branch_tag).strip!}-#{fetch(:current_version)}".sub(/^-/, ''),
                 projects: projects }
 
     json_payload = JSON.generate(payload)
