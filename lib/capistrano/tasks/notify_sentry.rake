@@ -18,12 +18,13 @@ namespace :sentry do
 
     run_locally do
       begin
-        RestClient.post(url, json_payload,
-                        content_type: 'application/json', authorization: "Bearer #{token}")
+        response = RestClient.post(url, json_payload,
+                                   content_type: 'application/json',
+                                   authorization: "Bearer #{token}")
 
         puts "Sentry response: #{response.body}"
       rescue StandardError => e
-        puts e.response
+        puts e
       end
     end
   end
