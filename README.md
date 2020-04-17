@@ -52,6 +52,7 @@ You need to configure the projects name in different environment.
 
 # In config/deploy/staging.rb
 
+set :sentry_endpoint, 'https://sentry.io/api/0/organizations/'
 set :sentry_projects, ['your first project', 'your second project']
 set :sentry_organization, 'your organization name' 
 set :sentry_token, 'the token you get from last section'
