@@ -8,7 +8,7 @@ namespace :sentry do
     projects = fetch(:sentry_projects)
 
     payload = { version: "#{fetch(:branch_tag).strip!}-#{fetch(:current_version)}".sub(/^-/, ''),
-                url : "#{fetch(:sentry_git_compare_url)}#{fetch(:previous_revision)}..#{fetch(:current_version)}",
+                url: "#{fetch(:sentry_git_compare_url)}#{fetch(:previous_revision)}..#{fetch(:current_version)}",
                 projects: projects }
 
     json_payload = JSON.generate(payload)
