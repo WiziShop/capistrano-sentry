@@ -1,11 +1,9 @@
 require 'rest-client'
 require 'json'
 
-SENTRY_ENDPOINT = 'https://sentry.io/api/0/organizations/'.freeze
-
 namespace :sentry do
   task :notify_deployment do
-    url = "#{SENTRY_ENDPOINT}#{fetch(:sentry_organization)}/releases/"
+    url = "#{fetch(:sentry_endpoint)}#{fetch(:sentry_organization)}/releases/"
     token = fetch(:sentry_token)
     projects = fetch(:sentry_projects)
 
