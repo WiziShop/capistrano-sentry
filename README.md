@@ -52,13 +52,13 @@ You need to configure the projects name in different environment.
 
 # In config/deploy/staging.rb
 
-set: :sentry_projects, ['your first project', 'your second project']
-set: :sentry_organization, 'your organization name' 
-set: :sentry_token, 'the token you get from last section'
-set: :branch_tag, `git describe --tags`
+set :sentry_projects, ['your first project', 'your second project']
+set :sentry_organization, 'your organization name' 
+set :sentry_token, 'the token you get from last section'
+set :branch_tag, `git describe --tags`
 
 # current version name will append after your branch name 
-set: :current_version, `git rev-parse HEAD`.strip
+set :current_version, `git rev-parse HEAD`.strip
 
 ```
 
